@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 def collect_arxiv_papers(
     year: int = 2025,
     category: str = "cs.RO",
-    max_results: int = 1000
+    max_results: int = 5000
 ) -> List[Dict[str, str]]:
     """
     收集arXiv论文标题

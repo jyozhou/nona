@@ -56,18 +56,19 @@ python scripts/collect_titles.py --source rss --year 2024
 python scripts/collect_titles.py --source icra --year 2024
 python scripts/collect_titles.py --source iros --year 2024
 
-# 收集arXiv论文（可指定分类）
-python scripts/collect_titles.py --source arxiv --year 2025
-python scripts/collect_titles.py --source arxiv --year 2025 --arxiv-category cs.RO
+# 收集arXiv论文（可指定分类(默认RO)和最大数量）
+python scripts/collect_titles.py --source arxiv --year 2025 --max-results 3000
+python scripts/collect_titles.py --source arxiv --year 2025 --arxiv-category cs.AI --max-results 8000
 
 # 收集所有来源
-python scripts/collect_titles.py --source all --year 2024
+python scripts/collect_titles.py --source all --year 2024 --max-results 6000
 ```
 
 **参数说明**：
 - `--source`: 论文来源，可选值：`arxiv`, `neurips`, `iclr`, `icml`, `corl`, `rss`, `icra`, `iros`, `all`（默认：`all`）
 - `--year`: 年份（默认：`2024`）
 - `--arxiv-category`: arXiv分类，仅对`arxiv`有效（默认：`cs.RO`），常见分类：`cs.RO`, `cs.AI`, `cs.CV`, `cs.LG`, `cs.CL`
+- `--max-results`: arXiv最大抓取数量（默认 `5000`，单批次最多 `1000`，脚本会自动分页）
 
 ### 2. 获取论文详细信息
 
@@ -110,6 +111,9 @@ python scripts/process_pdfs.py --status downloaded --limit 50
 - `--status`: 要处理的论文状态（默认：`downloaded`）
 - `--skip-download`: 跳过下载步骤，只进行文本转换
 - `--skip-convert`: 跳过文本转换步骤，只进行下载
+
+**注释**：
+- corl、iclr、icml、icra、iros等会议第一篇文章下载失败是正常现象，在dblp爬取会议接收文章标题列表时获取到的第一个标题是当年会议记录出版信息
 
 ### 4. AI分析和筛选
 

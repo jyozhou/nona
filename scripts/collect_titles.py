@@ -27,6 +27,8 @@ def main():
     ], default='all', help='论文来源')
     parser.add_argument('--year', type=int, default=2024, help='年份')
     parser.add_argument('--arxiv-category', type=str, default='cs.RO', help='arXiv分类')
+    parser.add_argument('--max-results', type=int, default=5000,
+                        help='arXiv 最大抓取数量（默认5000，单批次最多1000）')
     
     args = parser.parse_args()
     
@@ -52,7 +54,11 @@ def main():
         
         try:
             if source == 'arxiv':
-                papers = collectors.collect_arxiv_papers(args.year, args.arxiv_category)
+                papers = collectors.collect_arxiv_papers(
+                    args.year,
+                    args.arxiv_category,
+                    args.max_results
+                )
             elif source == 'neurips':
                 papers = collectors.collect_neurips_papers(args.year)
             elif source == 'iclr':
@@ -83,6 +89,14 @@ def main():
         logger.info(f"保存到数据库...")
         logger.info(f"{'='*80}\n")
         
+        seen_titles = set()
+        unique_papers = []
+        for paper in all_papers:
+            title_key = paper['title'].lower().strip()
+            if title_key not in seen_titles:
+                seen_titles.add(title_key)
+                unique_papers.append(paper)
+        all_papers = unique_papers
         # 转换格式
         papers_to_insert = []
         for paper in all_papers:
