@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="stats-grid">
+    {% if stats and stats.status_counts %}
+        {% for status, count in stats.status_counts.items() %}
+            <div class="stat-card">
+                <span class="stat-label">{{ status }}</span>
+                <span class="stat-value">{{ count }}</span>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+{% for section in sections %}
+<details class="paper-section" {% if section.count and section.status in ['analyzed', 'processed'] %}open{% endif %}>
+    <summary>
+        <span>{{ section.label }}</span>
+        <span class="badge">{{ section.count }}</span>
+    </summary>
+    {% if section.papers %}
+        <ul>
+            {% for paper in section.papers %}
+                <li>
+                    <a href="{{ url_for('paper_detail', paper_id=paper.id) }}">{{ paper.title }}</a>
+                    <span class="meta">{{ paper.source or '未知来源' }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="empty">暂无此状态的论文</p>
+    {% endif %}
+</details>
+{% endfor %}
+{% endblock %}
+

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title if title else "论文结果面板" }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>论文结果面板</h1>
+        <p>总论文数：{{ stats.total_papers if stats else 'N/A' }}</p>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <span>FastAPI · 数据来自本地数据库</span>
+    </footer>
+</body>
+</html>
+

@@ -155,6 +155,9 @@ python scripts/retry_failures.py --type detail
 
 # 将下载失败的条目重新放回TobeDownloaded队列
 python scripts/retry_failures.py --type download
+
+# 启动网页端可视化（FastAPI）
+uvicorn web.app:app --reload
 ```
 
 
@@ -182,6 +185,12 @@ python scripts/analyze_papers.py --limit 20
 ```
 pendingTitles → TobeDownloaded → processed → analyzed
 ```
+
+### Web 可视化功能
+
+- 首页按状态折叠展示论文标题列表，可展开查看
+- 点击某篇论文可在浏览器中查看 PDF 预览、文本片段、相关性评分与总结
+- 运行 `uvicorn web.app:app --reload`（默认 http://127.0.0.1:8000）即可打开界面
 
 **查询相关论文**：
 ```sql
