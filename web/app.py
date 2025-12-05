@@ -116,7 +116,13 @@ async def serve_pdf(paper_id: str):
     if not pdf_path.exists():
         raise HTTPException(status_code=404, detail="PDF not found")
 
-    return FileResponse(pdf_path, media_type="application/pdf", filename=pdf_path.name)
+    headers = {"Content-Disposition": f'inline; filename="{pdf_path.name}"'}
+    return FileResponse(
+        path=str(pdf_path),
+        media_type="application/pdf",
+        filename=pdf_path.name,
+        headers=headers,
+    )
 
 
 @app.get("/text/{paper_id}", response_class=HTMLResponse)
