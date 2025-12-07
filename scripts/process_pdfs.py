@@ -54,18 +54,22 @@ def main():
         title = paper['title']
         arxiv_id = paper.get('arxiv_id')
         pdf_url = paper.get('pdf_url')
+        file_id = arxiv_id or paper_id
         
         logger.info(f"[{i}/{len(papers)}] 处理: {title}")
         
-        if not arxiv_id or not pdf_url:
-            reason = "缺少arXiv ID或PDF URL"
+        if not pdf_url:
+            reason = "缺少PDF URL"
             logger.warning(f"✗ {reason}")
             db.update_paper_status(paper_id, 'downloadFailed')
             db.record_download_failure(paper_id, title, arxiv_id, pdf_url, reason)
             continue
         
-        pdf_path = PDF_DIR / f"{arxiv_id}.pdf"
-        text_path = TEXT_DIR / f"{arxiv_id}.txt"
+        if not file_id:
+            file_id = str(hash(title))
+
+        pdf_path = PDF_DIR / f"{file_id}.pdf"
+        text_path = TEXT_DIR / f"{file_id}.txt"
         
         try:
             # 下载PDF
