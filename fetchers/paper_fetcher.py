@@ -9,6 +9,7 @@ import requests
 import xml.etree.ElementTree as ET
 import re
 import time
+import difflib
 from typing import Dict, List, Optional
 from tqdm import tqdm
 
@@ -104,21 +105,85 @@ def _combined_search(title: str, max_results_per_source: int = 10) -> Optional[D
     """
     arxiv_results = _search_arxiv(title, max_results_per_source)
     arxiv_candidates = [r for r in arxiv_results if r]
-    arxiv_with_pdf = [r for r in arxiv_candidates if r.get("pdf_url")]
-    if arxiv_with_pdf:
-        return arxiv_with_pdf[0]
 
+    # 先在 arXiv 里选一个与标题最相似的结果
+    best_from_arxiv = _pick_best_match(title, arxiv_candidates, source_name="arXiv")
+    if best_from_arxiv and best_from_arxiv.get("pdf_url"):
+        return best_from_arxiv
+
+    # 再尝试 OpenAlex
     openalex_results = _search_openalex(title, max_results_per_source)
     openalex_candidates = [r for r in openalex_results if r]
-    openalex_with_pdf = [r for r in openalex_candidates if r.get("pdf_url")]
-    if openalex_with_pdf:
-        return openalex_with_pdf[0]
 
-    if arxiv_candidates:
-        return arxiv_candidates[0]
-    if openalex_candidates:
-        return openalex_candidates[0]
+    best_from_openalex = _pick_best_match(title, openalex_candidates, source_name="OpenAlex")
+    if best_from_openalex and best_from_openalex.get("pdf_url"):
+        return best_from_openalex
+
+    # 都没有足够相似的结果，就认为查不到，返回 None
     return None
+
+
+def _normalize_title(text: str) -> str:
+    """简单归一化标题：小写 + 压缩空白"""
+    if not text:
+        return ""
+    return " ".join(text.lower().split())
+
+
+def _title_similarity(query_title: str, candidate_title: str) -> float:
+    """计算两个标题的相似度 (0~1)"""
+    q = _normalize_title(query_title)
+    c = _normalize_title(candidate_title)
+    if not q or not c:
+        return 0.0
+    return difflib.SequenceMatcher(None, q, c).ratio()
+
+
+def _pick_best_match(
+    query_title: str,
+    candidates: List[Dict],
+    source_name: str,
+    min_similarity: float = 0.8,
+) -> Optional[Dict]:
+    """
+    从候选结果中选择与 query_title 最相似的一条，要求相似度 >= min_similarity
+    """
+    if not candidates:
+        return None
+
+    best = None
+    best_score = 0.0
+
+    for cand in candidates:
+        cand_title = cand.get("title", "") or ""
+        score = _title_similarity(query_title, cand_title)
+        if score > best_score:
+            best_score = score
+            best = cand
+
+    if not best:
+        return None
+
+    logger.info(
+        "Best %s match for %r is %r (similarity=%.3f)",
+        source_name,
+        query_title,
+        best.get("title"),
+        best_score,
+    )
+
+    if best_score < min_similarity:
+        logger.warning(
+            "%s 返回了 %d 条结果，但与标题 %r 的最佳相似度只有 %.3f，"
+            "认为匹配不可靠，放弃这些结果。",
+            source_name,
+            len(candidates),
+            query_title,
+            best_score,
+        )
+        return None
+
+    return best
 
 
 def _search_arxiv(title: str, max_results: int = 10) -> List[Dict]:
