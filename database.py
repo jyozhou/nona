@@ -149,6 +149,20 @@ class Database:
             if row:
                 return dict(row)
             return None
+
+    def get_paper_by_arxiv_id(self, arxiv_id: str) -> Optional[Dict]:
+        """根据arXiv ID获取论文"""
+        if not arxiv_id:
+            return None
+
+        with sqlite3.connect(self.db_path) as conn:
+            conn.row_factory = sqlite3.Row
+            cursor = conn.execute("SELECT * FROM papers WHERE arxiv_id = ?", (arxiv_id,))
+            row = cursor.fetchone()
+
+            if row:
+                return dict(row)
+            return None
     
     def get_papers_by_status(self, status: str, limit: int = None) -> List[Dict]:
         """
@@ -291,6 +305,17 @@ class Database:
                     "download_failures": download_failures,
                 },
             }
+
+    def delete_paper(self, paper_id: str) -> bool:
+        """删除论文记录"""
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                conn.execute("DELETE FROM papers WHERE id = ?", (paper_id,))
+                conn.commit()
+                return True
+        except Exception as e:
+            logger.error(f"Error deleting paper: {e}")
+            return False
 
     def record_detail_failure(self, paper_id: str, title: str, source: Optional[str] = None, reason: str = "") -> None:
         """记录获取详细信息失败"""

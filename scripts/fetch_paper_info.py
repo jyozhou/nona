@@ -58,8 +58,27 @@ def main():
                 info = fetch_paper_info(title)
 
                 if info and info.get("pdf_url"):
+                    arxiv_id = info.get("arxiv_id")
+
+                    # 如果 arxiv_id 已存在，说明是重复论文，删除当前 title，跳过即可
+                    if arxiv_id:
+                        existing = db.get_paper_by_arxiv_id(arxiv_id)
+                        if existing and existing.get("id") != paper_id:
+                            logger.warning(
+                                "检测到重复论文: arxiv_id=%s 已存在于记录(id=%s, title=%r)，"
+                                "当前记录(id=%s, title=%r) 将被删除并跳过。",
+                                arxiv_id,
+                                existing.get("id"),
+                                existing.get("title"),
+                                paper_id,
+                                title,
+                            )
+                            db.delete_paper(paper_id)
+                            db.remove_detail_failure(paper_id)
+                            break
+
                     updates = {
-                        'arxiv_id': info.get('arxiv_id'),
+                        'arxiv_id': arxiv_id,
                         'pdf_url': info.get('pdf_url'),
                         'authors': info.get('authors', []),
                         'abstract': info.get('abstract'),
@@ -76,8 +95,26 @@ def main():
                 logger.warning("首条结果缺少PDF链接，尝试获取备用结果...")
                 fallback = fetch_paper_info(title)
                 if fallback and fallback.get("pdf_url"):
+                    arxiv_id_fb = fallback.get("arxiv_id")
+
+                    if arxiv_id_fb:
+                        existing = db.get_paper_by_arxiv_id(arxiv_id_fb)
+                        if existing and existing.get("id") != paper_id:
+                            logger.warning(
+                                "检测到重复论文(备用结果): arxiv_id=%s 已存在于记录(id=%s, title=%r)，"
+                                "当前记录(id=%s, title=%r) 将被删除并跳过。",
+                                arxiv_id_fb,
+                                existing.get("id"),
+                                existing.get("title"),
+                                paper_id,
+                                title,
+                            )
+                            db.delete_paper(paper_id)
+                            db.remove_detail_failure(paper_id)
+                            break
+
                     updates = {
-                        'arxiv_id': fallback.get('arxiv_id'),
+                        'arxiv_id': arxiv_id_fb,
                         'pdf_url': fallback.get('pdf_url'),
                         'authors': fallback.get('authors', []),
                         'abstract': fallback.get('abstract'),
