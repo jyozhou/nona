@@ -178,6 +178,12 @@ def _build_analysis_prompt(
     
     prompt = f"""请分析以下论文，判断它是否与这些研究主题相关：{tags_str}
 
+当前调研主题是数字人物/人脸/人头三维重建，重点关注近两年的 CVPR、ICCV、SIGGRAPH、ICLR 等会议论文。请优先判断：
+1. 是否聚焦 avatar、人脸、人头、上半身或人体的 3D/4D 重建、生成、跟踪、动画或神经渲染；
+2. 是否可能适用于 Nersemble 等人头/人脸数据集；
+3. 方法是偏前馈式还是优化式，若是 LAM/LHM 这类高成本前馈方法，请说明可作为特征提取或预处理组件；
+4. 论文或项目是否开源，以及文中提到的显卡/训练时长/推理成本。
+
 论文标题：{paper_info.get('title', 'Unknown')}
 
 论文作者：{', '.join(paper_info.get('authors', [])[:5]) if isinstance(paper_info.get('authors'), list) else paper_info.get('authors', 'N/A')}
@@ -193,7 +199,7 @@ def _build_analysis_prompt(
     "is_relevant": true/false,
     "relevance_score": 0.0-1.0,
     "reasoning": "判断理由（中文，2-3句话）",
-    "summary": "论文总结（中文，包括：研究问题、方法、主要贡献、实验结果，200-300字）"
+    "summary": "论文总结（中文，200-350字，必须覆盖：任务定义/输入输出、方法类型与核心模型、是否偏前馈式或优化式、代码是否开源、显卡或计算成本信息；若原文未说明请写未提及）"
 }}
 
 评分标准：

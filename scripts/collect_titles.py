@@ -11,7 +11,7 @@ from pathlib import Path
 # 添加项目根目录到路径
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from config import DB_PATH, LOG_LEVEL, LOG_FORMAT
+from config import DB_PATH, LOG_LEVEL, LOG_FORMAT, TITLE_KEYWORDS
 from database import Database
 import collectors
 
@@ -23,12 +23,21 @@ logger = logging.getLogger(__name__)
 def main():
     parser = argparse.ArgumentParser(description='收集论文标题')
     parser.add_argument('--source', type=str, choices=[
-        'arxiv', 'neurips', 'iclr', 'icml', 'corl', 'rss', 'icra', 'iros', 'all'
+        'arxiv', 'neurips', 'iclr', 'icml', 'corl', 'rss', 'icra', 'iros',
+        'cvpr', 'iccv', 'siggraph', 'google', 'all'
     ], default='all', help='论文来源')
     parser.add_argument('--year', type=int, default=2024, help='年份')
     parser.add_argument('--arxiv-category', type=str, default='cs.RO', help='arXiv分类')
     parser.add_argument('--max-results', type=int, default=5000,
                         help='arXiv 最大抓取数量（默认5000，单批次最多1000）')
+    parser.add_argument('--query', type=str, default=None,
+                        help='Google 搜索 query，例如 "cvpr 2025 paper list"')
+    parser.add_argument('--keyword-filter', action='store_true',
+                        help='对收集到的标题使用 TITLE_KEYWORDS 做快速预筛')
+    parser.add_argument('--keyword', action='append', default=[],
+                        help='追加标题筛选关键词，可重复传入，支持 "keyword:weight"')
+    parser.add_argument('--min-keyword-score', type=float, default=2.0,
+                        help='标题关键词预筛最低分数，默认 2.0')
     
     args = parser.parse_args()
     
@@ -43,7 +52,10 @@ def main():
     all_papers = []
     
     if args.source == 'all':
-        sources = ['arxiv', 'neurips', 'iclr', 'icml', 'corl', 'rss', 'icra', 'iros']
+        sources = [
+            'arxiv', 'neurips', 'iclr', 'icml', 'corl', 'rss', 'icra', 'iros',
+            'cvpr', 'iccv', 'siggraph'
+        ]
     else:
         sources = [args.source]
     
@@ -73,8 +85,30 @@ def main():
                 papers = collectors.collect_icra_papers(args.year)
             elif source == 'iros':
                 papers = collectors.collect_iros_papers(args.year)
+            elif source == 'cvpr':
+                papers = collectors.collect_cvpr_papers(args.year)
+            elif source == 'iccv':
+                papers = collectors.collect_iccv_papers(args.year)
+            elif source == 'siggraph':
+                papers = collectors.collect_siggraph_papers(args.year)
+            elif source == 'google':
+                query = args.query or f"cvpr {args.year} paper list"
+                papers = collectors.collect_google_paper_titles(
+                    query=query,
+                    year=args.year,
+                    keywords=[*TITLE_KEYWORDS, *args.keyword],
+                    max_results=args.max_results,
+                    min_keyword_score=args.min_keyword_score,
+                )
             else:
                 continue
+
+            if args.keyword_filter and source != 'google':
+                papers = collectors.filter_papers_by_keywords(
+                    papers,
+                    [*TITLE_KEYWORDS, *args.keyword],
+                    min_score=args.min_keyword_score,
+                )
             
             all_papers.extend(papers)
             logger.info(f"收集到 {len(papers)} 篇论文")

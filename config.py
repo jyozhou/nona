@@ -49,23 +49,61 @@ DEFAULT_LLM_PROVIDER = os.getenv("DEFAULT_LLM_PROVIDER", "custom")
 
 # 相关性分析标签（可配置）
 RELEVANCE_TAGS = [
-    "机器人",
-    "具身智能",
-    "灵巧手",
-    "抓取",
-    "世界模型",
-    "物理智能",
-    "embodied ai",
-    "dexterous manipulation",
-    "grasping",
-    "world model"
+    "3D avatar",
+    "digital human",
+    "human head reconstruction",
+    "human face reconstruction",
+    "facial avatar",
+    "head avatar",
+    "3D face",
+    "3D head",
+    "neural rendering",
+    "Gaussian splatting",
+    "NeRF",
+    "monocular reconstruction",
+    "personalized avatar",
+    "feed-forward reconstruction",
+    "optimization-based reconstruction",
+    "Nersemble",
+    "open-source code",
+    "GPU requirements"
+]
+
+# 标题级快速预筛关键词，格式可以是 "keyword" 或 "keyword:weight"
+# 当前 survey 只关注三组标题信号：
+# 1. avatar
+# 2. human head / human face / human body
+# 3. 3D / 4D
+TITLE_KEYWORDS = [
+    "avatar:4",
+    "facial avatar:4",
+    "head avatar:4",
+    "face avatar:4",
+    "body avatar:4",
+    "human avatar:4",
+    "human head:4",
+    "human face:4",
+    "human body:4",
+    "head:2",
+    "face:2",
+    "body:2",
+    "3d:3",
+    "4d:3",
+    "three dimensional:3",
+    "four dimensional:3"
 ]
 
 # 会议和年份配置
 CONFERENCES = {
     "ai": ["neurips", "iclr", "icml"],
-    "robotics": ["corl", "rss", "icra", "iros"]
+    "robotics": ["corl", "rss", "icra", "iros"],
+    "vision_graphics": ["cvpr", "iccv", "siggraph"],
+    "digital_human_survey": ["cvpr", "iclr", "iccv", "siggraph"]
 }
+
+# Google Programmable Search JSON API 配置（用于 search-assisted 标题抓取）
+GOOGLE_SEARCH_API_KEY = os.getenv("GOOGLE_SEARCH_API_KEY", "")
+GOOGLE_SEARCH_ENGINE_ID = os.getenv("GOOGLE_SEARCH_ENGINE_ID", "")
 
 # 日志配置
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")

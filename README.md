@@ -49,12 +49,25 @@ python scripts/collect_titles.py --source <来源> --year <年份>
 
 # 收集各会议论文
 python scripts/collect_titles.py --source neurips --year 2024
-python scripts/collect_titles.py --source iclr --year 2025
+python scripts/collect_titles.py --source iclr --year 2026 --keyword-filter --min-keyword-score 3
 python scripts/collect_titles.py --source icml --year 2024
 python scripts/collect_titles.py --source corl --year 2024
 python scripts/collect_titles.py --source rss --year 2024
 python scripts/collect_titles.py --source icra --year 2024
 python scripts/collect_titles.py --source iros --year 2024
+python scripts/collect_titles.py --source cvpr --year 2025
+python scripts/collect_titles.py --source iccv --year 2025
+python scripts/collect_titles.py --source siggraph --year 2025
+
+# 数字人物/人头人脸三维重建标题预筛
+python scripts/collect_titles.py --source cvpr --year 2025 --keyword-filter --min-keyword-score 3
+python scripts/collect_titles.py --source iccv --year 2025 --keyword-filter --min-keyword-score 3
+python scripts/collect_titles.py --source siggraph --year 2025 --keyword-filter --min-keyword-score 3
+
+# Google 搜索辅助：先搜 "cvpr 2025 paper list"，再抓取/筛选相关标题
+# 需要在 .env 配置 GOOGLE_SEARCH_API_KEY 和 GOOGLE_SEARCH_ENGINE_ID；
+# 若 query 指向 CVPR/ICCV，未配置 Google 时也会直接尝试 CVF 官方列表。
+python scripts/collect_titles.py --source google --year 2025 --query "cvpr 2025 paper list" --min-keyword-score 3
 
 # 收集arXiv论文（可指定分类(默认RO)和最大数量）
 python scripts/collect_titles.py --source arxiv --year 2025 --max-results 3000
@@ -65,10 +78,14 @@ python scripts/collect_titles.py --source all --year 2024 --max-results 6000
 ```
 
 **参数说明**：
-- `--source`: 论文来源，可选值：`arxiv`, `neurips`, `iclr`, `icml`, `corl`, `rss`, `icra`, `iros`, `all`（默认：`all`）
+- `--source`: 论文来源，可选值：`arxiv`, `neurips`, `iclr`, `icml`, `corl`, `rss`, `icra`, `iros`, `cvpr`, `iccv`, `siggraph`, `google`, `all`（默认：`all`）
 - `--year`: 年份（默认：`2024`）
 - `--arxiv-category`: arXiv分类，仅对`arxiv`有效（默认：`cs.RO`），常见分类：`cs.RO`, `cs.AI`, `cs.CV`, `cs.LG`, `cs.CL`
 - `--max-results`: arXiv最大抓取数量（默认 `5000`，单批次最多 `1000`，脚本会自动分页）
+- `--keyword-filter`: 对会议/arXiv标题使用 `config.py` 中的 `TITLE_KEYWORDS` 做快速预筛
+- `--keyword`: 追加标题筛选关键词，支持重复传入和加权格式，例如 `--keyword "nersemble:4"`
+- `--min-keyword-score`: 标题关键词预筛最低分数（默认 `2.0`）
+- `--query`: `--source google` 时使用的搜索语句，例如 `"cvpr 2025 paper list"`
 
 ### 2. 获取论文详细信息
 
@@ -149,6 +166,22 @@ python scripts/clean_data.py
 
 # 检查当前数据库情况
 python scripts/quick_verify.py
+
+# 显示获取详情失败条目的标题
+python scripts/list_detail_failures.py
+
+# 手动补充失败论文PDF：
+    # 先把下载好的PDF放到 data/fixpdfs，再 dry-run 检查自动匹配结果
+    python scripts/import_manual_pdfs.py --dry-run
+
+    # 确认匹配无误后正式导入：
+    # 脚本会复制PDF到 data/pdfs，生成TXT到 data/texts，并将数据库状态置为 processed
+    python scripts/import_manual_pdfs.py
+
+    # 常用可选参数
+    python scripts/import_manual_pdfs.py --min-match 0.4
+    python scripts/import_manual_pdfs.py --overwrite
+    python scripts/import_manual_pdfs.py --allow-supplemental
 
 # 将获取详情失败的条目重新放回pendingTitles队列
 python scripts/retry_failures.py --type detail

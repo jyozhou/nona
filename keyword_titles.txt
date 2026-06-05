@@ -1,0 +1,290 @@
+
+================================================================================
+CVPR 2026 relevant titles
+================================================================================
+collected: 4069, matched: 43
+
+1. [15.00] FHAvatar: Fast and High-Fidelity Reconstruction of Face-and-Hair Composable 3D Head Avatar from Few Casual Captures
+   matched: avatar, head avatar, head, face, 3d
+2. [13.00] GeoDiff4D: Geometry-Aware Diffusion for 4D Head Avatar Reconstruction
+   matched: avatar, head avatar, head, 4d
+3. [11.00] HumanNOVA: Photorealistic, Universal and Rapid 3D Human Avatar Modeling from a Single Image
+   matched: avatar, human avatar, 3d
+4. [10.00] OMG-Avatar: One-shot Multi-LOD Gaussian Head Avatar
+   matched: avatar, head avatar, head
+5. [10.00] UIKA: Fast Universal Head Avatar from Pose-Free Images
+   matched: avatar, head avatar, head
+6. [10.00] Avatar Forcing: Real-Time Interactive Head Avatar Generation for Natural Conversation
+   matched: avatar, head avatar, head
+7. [10.00] Feed-forward Gaussian Registration for Head Avatar Creation and Editing
+   matched: avatar, head avatar, head
+8. [10.00] ELITE: Efficient Gaussian Head Avatar from a Monocular Video via Learned Initialization and Test-time Generative Adaptation
+   matched: avatar, head avatar, head
+9. [10.00] Fresco: Frequency-Spatial Consistent Optimization for Fine-Grained Head Avatar Modeling
+   matched: avatar, head avatar, head
+10. [9.00] STAvatar: Soft Binding and Temporal Density Control for Monocular 3D Head Avatars Reconstruction
+   matched: head avatar, head, 3d
+11. [9.00] FlexAvatar: Learning Complete 3D Head Avatars with Partial Supervision
+   matched: head avatar, head, 3d
+12. [9.00] Multi-view Consistent 3D Gaussian Head Avatars 'without' Multi-view Generation
+   matched: head avatar, head, 3d
+13. [6.00] PhysHead: Simulation-Ready Gaussian Head Avatars
+   matched: head avatar, head
+14. [6.00] Occluded Human Body Capture with Frequency Domain Denoising Prior
+   matched: human body, body
+15. [6.00] ConsisVLA-4D: Advancing Spatiotemporal Consistency in Efficient 3D-Perception and 4D-Reasoning for Robotic Manipulation
+   matched: 3d, 4d
+16. [6.00] RaGS: Unleashing 3D Gaussian Splatting from 4D Radar and Monocular Cue for 3D Object Detection
+   matched: 3d, 4d
+17. [6.00] RPGFusion: 4D Radar Prior-Guided Multi-Modal Fusion for 3D Detection
+   matched: 3d, 4d
+18. [6.00] Action Motifs: Self-Supervised Hierarchical Representation of Human Body Movements
+   matched: human body, body
+19. [6.00] R4Det: 4D Radar-Camera Fusion for High-Performance 3D Object Detection
+   matched: 3d, 4d
+20. [6.00] HyperGaussians: High-Dimensional Gaussian Splatting for High-Fidelity Animatable Face Avatars
+   matched: face avatar, face
+21. [6.00] SyncDreamer: Controllable and Expressive Avatar Generation Beyond the Talking Head
+   matched: avatar, head
+22. [6.00] FlexAvatar: Flexible Large Reconstruction Model for Animatable Gaussian Head Avatars with Detailed Deformation
+   matched: head avatar, head
+23. [6.00] Catalyst4D: High-Fidelity 3D-to-4D Scene Editing via Dynamic Propagation
+   matched: 3d, 4d
+24. [6.00] Motion 3-to-4: 3D Motion Reconstruction for 4D Synthesis
+   matched: 3d, 4d
+25. [6.00] FISHuman: Fine-grained Single-image 3D Human Reconstruction via Multi-view 4D Remeshing
+   matched: 3d, 4d
+26. [6.00] Taming Video Models for 3D and 4D Generation via Zero-Shot Camera Control
+   matched: 3d, 4d
+27. [6.00] 4DWorldBench: A Comprehensive Evaluation Framework for 3D/4D World Generation Models
+   matched: 3d, 4d
+28. [6.00] Tracking-Guided 4D Generation: Foundation-Tracker Motion Priors for 3D Model Animation
+   matched: 3d, 4d
+29. [6.00] MORE-STEM: Long-Short MemOry REcall and Spatio-TEmporal Consistency Model for Query-Driven 3D/4D Point Cloud Segmentation
+   matched: 3d, 4d
+30. [5.00] SAM 3D Body: Robust Full-Body Human Mesh Recovery
+   matched: body, 3d
+31. [5.00] PercHead: Perceptual Head Model for Single-Image 3D Head Reconstruction & Editing
+   matched: head, 3d
+32. [5.00] Enhancing Hands in 3D Whole-Body Pose Estimation with Conditional Hands Modulator
+   matched: body, 3d
+33. [5.00] EgoControl: Controllable Egocentric Video Generation via 3D Full-Body Poses
+   matched: body, 3d
+34. [5.00] EmoDiffTalk: Emotion-aware Diffusion for Editable 3D Gaussian Talking Head
+   matched: head, 3d
+35. [5.00] RelightAnyone: A Generalized Relightable 3D Gaussian Head Model
+   matched: head, 3d
+36. [5.00] Skullptor: High Fidelity 3D Head Reconstruction in Seconds with Multi-View Normal Prediction
+   matched: head, 3d
+37. [5.00] MimicTalker: A Multimodal Interactive and Memory-Enhanced Framework for Real-Time Dyadic 3D Head Generation
+   matched: head, 3d
+38. [5.00] ViBES: A Conversational Agent with Behaviorally-Intelligent 3D Virtual Body
+   matched: body, 3d
+39. [4.00] StreamAvatar: Streaming Diffusion Models for Real-Time Interactive Human Avatars
+   matched: human avatar
+40. [4.00] Feed-Forward One-Shot Animatable Textured Mesh Avatar Reconstruction
+   matched: avatar
+41. [4.00] AVATAR: Reinforcement Learning to See, Hear, and Reason Over Video
+   matched: avatar
+42. [4.00] Tavatar: Topology-Aware Gaussian Attribute Derivation for Animatable Human Avatars
+   matched: human avatar
+43. [4.00] Large-scale Codec Avatars: The Unreasonable Effectiveness of Large-scale Avatar Pretraining
+   matched: avatar
+
+
+================================================================================
+ICLR 2025 relevant titles
+================================================================================
+collected: 3703, matched: 8
+
+1. [8.00] Gaussian Head & Shoulders: High Fidelity Neural Upper Body Avatars with Anchor Gaussian Guided Texture Warping
+   matched: body avatar, head, body
+2. [6.00] Gaussian Differentially Private Human Faces Under a Face Radial Curve Representation
+   matched: human face, face
+3. [6.00] DAWN: Dynamic Frame Avatar with Non-autoregressive Diffusion Framework for Talking head Video Generation
+   matched: avatar, head
+4. [6.00] GenXD: Generating Any 3D and 4D Scenes
+   matched: 3d, 4d
+5. [6.00] SurFhead: Affine Rig Blending for Geometrically Accurate 2D Gaussian Surfel Head Avatars
+   matched: head avatar, head
+6. [5.00] EcoFace: Audio-Visual Emotional Co-Disentanglement Speech-Driven 3D Talking Face Generation
+   matched: face, 3d
+7. [5.00] Cafe-Talk: Generating 3D Talking Face Animation with Multimodal Coarse- and Fine-grained Control
+   matched: face, 3d
+8. [4.00] Loopy: Taming Audio-Driven Portrait Avatar with Long-Term Motion Dependency
+   matched: avatar
+
+
+================================================================================
+ICLR 2026 relevant titles
+================================================================================
+collected: 5352, matched: 7
+
+1. [9.00] FastGHA: Generalized Few-Shot 3D Gaussian Head Avatars with Real-Time Animation
+   matched: head avatar, head, 3d
+2. [7.00] FastAvatar: Towards Unified and Fast 3D Avatar Reconstruction with Large Gaussian Reconstruction Transformers
+   matched: avatar, 3d
+3. [6.00] LaTo: Landmark-tokenized Diffusion Transformer for Fine-grained Human Face Editing
+   matched: human face, face
+4. [5.00] Pixel3DMM: Versatile Screen-Space Priors for Single-Image 3D Face Reconstruction
+   matched: face, 3d
+5. [5.00] Anime-Ready: Controllable 3D Anime Character Generation with Body-Aligned Component-Wise Garment Modeling
+   matched: body, 3d
+6. [5.00] Condition Matters in Full-head 3D GANs
+   matched: head, 3d
+7. [4.00] Densemarks: Learning Canonical Embeddings for Human Heads Images via Point Tracks
+   matched: human head
+
+
+
+================================================================================
+ICCV 2025 relevant titles
+================================================================================
+collected: 2701, matched: 29
+
+1. [13.00] GeoAvatar: Adaptive Geometrical Gaussian Splatting for 3D Head Avatar
+   matched: avatar, head avatar, head, 3d
+2. [11.00] FaceCraft4D: Animated 3D Facial Avatar Generation from a Single Image
+   matched: avatar, facial avatar, 3d
+3. [10.00] Capturing head avatar with hand contacts from a monocular video
+   matched: avatar, head avatar, head
+4. [9.00] PHD: Personalized 3D Human Body Fitting with Point Diffusion
+   matched: human body, body, 3d
+5. [9.00] StrandHead: Text to Hair-Disentangled 3D Head Avatars Using Human-Centric Priors
+   matched: head avatar, head, 3d
+6. [9.00] GUAVA: Generalizable Upper Body 3D Gaussian Avatar
+   matched: avatar, body, 3d
+7. [9.00] Avat3r: Large Animatable Gaussian Reconstruction Model for High-fidelity 3D Head Avatars
+   matched: head avatar, head, 3d
+8. [9.00] Fine-Grained 3D Gaussian Head Avatars Modeling from Static Captures via Joint Reconstruction and Registration
+   matched: head avatar, head, 3d
+9. [9.00] PERSONA: Personalized Whole-Body 3D Avatar with Pose-Driven Deformations from a Single Image
+   matched: avatar, body, 3d
+10. [8.00] HADES: Human Avatar with Dynamic Explicit Hair Strands
+   matched: avatar, human avatar
+11. [7.00] MoGA: 3D Generative Avatar Prior for Monocular Gaussian Avatar Reconstruction
+   matched: avatar, 3d
+12. [7.00] TeRA: Rethinking Text-guided Realistic 3D Avatar Generation
+   matched: avatar, 3d
+13. [7.00] Towards Explicit Exoskeleton for the Reconstruction of Complicated 3D Human Avatars
+   matched: human avatar, 3d
+14. [6.00] C4D: 4D Made from 3D through Dual Correspondences
+   matched: 3d, 4d
+15. [6.00] OneGT: One-Shot Geometry-Texture Neural Rendering for Head Avatars
+   matched: head avatar, head
+16. [6.00] DimensionX: Create Any 3D and 4D Scenes from a Single Image with Decoupled Video Diffusion
+   matched: 3d, 4d
+17. [6.00] CVFusion: Cross-View Fusion of 4D Radar and Camera for 3D Object Detection
+   matched: 3d, 4d
+18. [6.00] SteerX: Creating Any Camera-Free 3D and 4D Scenes with Geometric Steering
+   matched: 3d, 4d
+19. [5.00] DPoser-X: Diffusion Model as Robust 3D Whole-body Human Pose Prior
+   matched: body, 3d
+20. [5.00] PersonaCraft: Personalized and Controllable Full-Body Multi-Human Scene Generation Using Occlusion-Aware 3D-Conditioned Diffusion
+   matched: body, 3d
+21. [5.00] FaceLift: Learning Generalizable Single Image 3D Face Reconstruction from Synthetic Heads
+   matched: face, 3d
+22. [5.00] Identity Preserving 3D Head Stylization with Multiview Score Distillation
+   matched: head, 3d
+23. [5.00] DynamicFace: High-Quality and Consistent Face Swapping for Image and Video using Composable 3D Facial Priors
+   matched: face, 3d
+24. [5.00] WarpHE4D: Dense 4D Head Map toward Full Head Reconstruction
+   matched: head, 4d
+25. [4.00] Head2Body: Body Pose Generation from Multi-sensory Head-mounted Inputs
+   matched: head, body
+26. [4.00] GAS: Generative Avatar Synthesis from a Single Image
+   matched: avatar
+27. [4.00] Im2Haircut: Single-view Strand-based Hair Reconstruction for Human Avatars
+   matched: human avatar
+28. [4.00] PRIMAL: Physically Reactive and Interactive Motor Model for Avatar Learning
+   matched: avatar
+29. [4.00] Disentangled Clothed Avatar Generation with Layered Representation
+   matched: avatar
+
+================================================================================
+SIGGRAPH 2025 relevant titles
+================================================================================
+collected: 389, matched: 5
+
+1. [7.00] StreamME: Simplify 3D Gaussian Avatar within Live Stream
+   matched: avatar, 3d
+2. [7.00] 3DGH: 3D Head Generation with Composable Hair and Face
+   matched: head, face, 3d
+3. [6.00] SqueezeMe: Mobile-Ready Distillation of Gaussian Full-Body Avatars
+   matched: body avatar, body
+4. [6.00] LAM: Large Avatar Model for One-shot Animatable Gaussian Head
+   matched: avatar, head
+5. [5.00] GSHeadRelight: Fast Relightability for 3D Gaussian Head Synthesis
+   matched: head, 3d
+
+================================================================================
+CVPR 2025 relevant titles
+================================================================================
+collected: 2871, matched: 33
+
+1. [10.00] Synthetic Prior for Few-Shot Drivable Head Avatar Inversion
+   matched: avatar, head avatar, head
+2. [10.00] MeGA: Hybrid Mesh-Gaussian Head Avatar for High-Fidelity Rendering and Head Editing
+   matched: avatar, head avatar, head
+3. [10.00] HRAvatar: High-Quality and Relightable Gaussian Head Avatar
+   matched: avatar, head avatar, head
+4. [9.00] DeClotH: Decomposable 3D Cloth and Human Body Reconstruction from a Single Image
+   matched: human body, body, 3d
+5. [9.00] 3D Gaussian Head Avatars with Expressive Dynamic Appearances by Compact Tensorial Representations
+   matched: head avatar, head, 3d
+6. [7.00] Towards High-fidelity 3D Talking Avatar with Personalized Dynamic Texture
+   matched: avatar, 3d
+7. [7.00] Creating Your Editable 3D Photorealistic Avatar with Tetrahedron-constrained Gaussian Splatting
+   matched: avatar, 3d
+8. [6.00] FATE: Full-head Gaussian Avatar with Textural Editing from Monocular Video
+   matched: avatar, head
+9. [6.00] GPAvatar: High-fidelity Head Avatars by Learning Efficient Gaussian Projections
+   matched: head avatar, head
+10. [6.00] HERA: Hybrid Explicit Representation for Ultra-Realistic Head Avatars
+   matched: head avatar, head
+11. [6.00] RGBAvatar: Reduced Gaussian Blendshapes for Online Modeling of Head Avatars
+   matched: head avatar, head
+12. [6.00] Zero-1-to-A: Zero-Shot One Image to Animatable Head Avatars Using Video Diffusion
+   matched: head avatar, head
+13. [6.00] MobilePortrait: Real-Time One-Shot Neural Head Avatars on Mobile Devices
+   matched: head avatar, head
+14. [6.00] V2X-R: Cooperative LiDAR-4D Radar Fusion with Denoising Diffusion for 3D Object Detection
+   matched: 3d, 4d
+15. [6.00] A Focused Human Body Model for Accurate Anthropometric Measurements Extraction
+   matched: human body, body
+16. [6.00] Is this Generated Person Existed in Real-world? Fine-grained Detecting and Calibrating Abnormal Human-body
+   matched: human body, body
+17. [5.00] Let's Chorus: Partner-aware Hybrid Song-Driven 3D Head Animation
+   matched: head, 3d
+18. [5.00] TaoAvatar: Real-Time Lifelike Full-Body Talking Avatars for Augmented Reality via 3D Gaussian Splatting
+   matched: body, 3d
+19. [5.00] InsTaG: Learning Personalized 3D Talking Head from Few-Second Video
+   matched: head, 3d
+20. [5.00] Perceptually Accurate 3D Talking Head Generation: New Definitions, Speech-Mesh Representation, and Evaluation Metrics
+   matched: head, 3d
+21. [5.00] LesionLocator: Zero-Shot Universal Tumor Segmentation and Tracking in 3D Whole-Body Imaging
+   matched: body, 3d
+22. [5.00] DualTalk: Dual-Speaker Interaction for 3D Talking Head Conversations
+   matched: head, 3d
+23. [4.00] DAGSM: Disentangled Avatar Generation with GS-enhanced Mesh
+   matched: avatar
+24. [4.00] GAF: Gaussian Avatar Reconstruction from Monocular Videos via Multi-view Diffusion
+   matched: avatar
+25. [4.00] Vid2Avatar-Pro: Authentic Avatar from Videos in the Wild via Universal Prior
+   matched: avatar
+26. [4.00] FADA: Fast Diffusion Avatar Synthesis with Mixed-Supervised Multi-CFG Distillation
+   matched: avatar
+27. [4.00] EasyCraft: A Robust and Efficient Framework for Automatic Avatar Crafting
+   matched: avatar
+28. [4.00] FRAME: Floor-aligned Representation for Avatar Motion from Egocentric Video
+   matched: avatar
+29. [4.00] Gaussian Eigen Models for Human Heads
+   matched: human head
+30. [4.00] VLOGGER: Multimodal Diffusion for Embodied Avatar Synthesis
+   matched: avatar
+31. [4.00] AniGS: Animatable Gaussian Avatar from a Single Image with Inconsistent Gaussian Reconstruction
+   matched: avatar
+32. [4.00] GeoAvatar: Geometrically-Consistent Multi-Person Avatar Reconstruction from Sparse Multi-View Videos
+   matched: avatar
+33. [4.00] Real-time High-fidelity Gaussian Human Avatars with Position-based Interpolation of Spatially Distributed MLPs
+   matched: human avatar

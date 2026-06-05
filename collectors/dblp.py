@@ -119,7 +119,7 @@ def fetch_dblp_papers_from_html(html_url: str, source_label: str) -> List[Dict[s
         logger.error("Failed to fetch DBLP HTML page %s: %s", html_url, exc)
         return papers
 
-    soup = BeautifulSoup(response.text, "lxml")
+    soup = BeautifulSoup(response.text, "html.parser")
 
     entries = soup.find_all(
         "li", class_=lambda value: value and "entry" in value
