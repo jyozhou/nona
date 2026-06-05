@@ -131,14 +131,15 @@ def batch_analyze_papers(
     iterator = tqdm(papers, desc="Analyzing papers") if show_progress else papers
     
     for paper in iterator:
-        paper_id = paper.get('arxiv_id') or paper.get('id')
+        db_paper_id = paper.get('id')
+        file_id = paper.get('arxiv_id') or db_paper_id
         
-        if not paper_id:
+        if not file_id:
             logger.warning(f"Missing paper ID for: {paper.get('title')}")
             continue
         
         # 读取文本文件
-        text_path = text_dir / f"{paper_id}.txt"
+        text_path = text_dir / f"{file_id}.txt"
         
         if not text_path.exists():
             logger.warning(f"Text file not found: {text_path}")
@@ -156,11 +157,11 @@ def batch_analyze_papers(
             
             if result:
                 # 添加paper_id到结果中
-                result['paper_id'] = paper_id
+                result['paper_id'] = db_paper_id or file_id
                 results.append(result)
                 
         except Exception as e:
-            logger.error(f"Error processing paper {paper_id}: {e}")
+            logger.error(f"Error processing paper {file_id}: {e}")
             continue
     
     logger.info(f"Successfully analyzed {len(results)}/{len(papers)} papers")
@@ -175,6 +176,13 @@ def _build_analysis_prompt(
     """构建分析提示词"""
     
     tags_str = ", ".join(relevance_tags)
+    title = paper_info.get('title') or 'Unknown'
+    authors_value = paper_info.get('authors')
+    if isinstance(authors_value, list):
+        authors = ', '.join(authors_value[:5]) if authors_value else 'N/A'
+    else:
+        authors = authors_value or 'N/A'
+    abstract = paper_info.get('abstract') or 'N/A'
     
     prompt = f"""请分析以下论文，判断它是否与这些研究主题相关：{tags_str}
 
@@ -184,12 +192,12 @@ def _build_analysis_prompt(
 3. 方法是偏前馈式还是优化式，若是 LAM/LHM 这类高成本前馈方法，请说明可作为特征提取或预处理组件；
 4. 论文或项目是否开源，以及文中提到的显卡/训练时长/推理成本。
 
-论文标题：{paper_info.get('title', 'Unknown')}
+论文标题：{title}
 
-论文作者：{', '.join(paper_info.get('authors', [])[:5]) if isinstance(paper_info.get('authors'), list) else paper_info.get('authors', 'N/A')}
+论文作者：{authors}
 
 论文摘要：
-{paper_info.get('abstract', 'N/A')[:1000]}
+{abstract[:1000]}
 
 论文内容（部分）：
 {paper_text[:10000]}

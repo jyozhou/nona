@@ -58,18 +58,19 @@ def main():
         paper_id = paper['id']
         title = paper['title']
         arxiv_id = paper.get('arxiv_id')
+        file_id = arxiv_id or paper_id
         
         logger.info(f"[{i}/{len(papers)}] 分析: {title}")
         
-        if not arxiv_id:
-            logger.warning(f"✗ 缺少arXiv ID")
+        if not title:
+            logger.warning(f"✗ 缺少论文标题")
             continue
         
         # 读取文本
-        text_path = TEXT_DIR / f"{arxiv_id}.txt"
+        text_path = TEXT_DIR / f"{file_id}.txt"
         
         if not text_path.exists():
-            logger.warning(f"✗ 文本文件不存在")
+            logger.warning(f"✗ 文本文件不存在: {text_path}")
             continue
         
         try:
